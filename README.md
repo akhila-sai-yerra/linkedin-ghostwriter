@@ -19,15 +19,6 @@ An open-source LinkedIn Ghostwriter AI Agent powered by MCP and LangChain. This 
 > 🛫 The publisher_node leverages Composio's tools to post on LinkedIn.  
 > 🧠 Finally, the supervisor stores the episodic memory of the agent in the MongoDB database using Langmem's Store Manager.”
 
-## Table of Contents
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Setup & Installation](#setup--installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Dependencies](#dependencies)
-- [License](#license)
-
 ## Overview
 
 This project constructs a state graph-based workflow for a LinkedIn Ghostwriter Agent using a combination of:
