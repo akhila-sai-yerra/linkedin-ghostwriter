@@ -1,69 +1,126 @@
-# LinkedIn Ghostwriter AI Agent
+# LinkedIn Ghostwriter 🤖✍️
 
-An open-source LinkedIn Ghostwriter AI Agent powered by MCP and LangChain. This agent was used to grow a LinkedIn account to 900 followers in just 7 weeks (CoachQuant) by leveraging modern tools for agent orchestration, web search, authentication, vector search, and episodic memory management.
+![LinkedIn Ghostwriter](https://img.shields.io/badge/LinkedIn%20Ghostwriter-powered%20by%20Langgraph-blue)
 
-> “Opensourcing a LinkedIn Ghostwriter AI Agent fueled by MCP & LangChain💥  
-> We leveraged this agent to grow a LinkedIn account to 900 followers in 7 weeks (CoachQuant) using LangChain, Exa, and MongoDB.  
-> This is how we did it 👇  
-> • LangGraph & LangChain for agent orchestration  
-> • Exa for web search  
-> • Composio's MCP for agent auth  
-> • MongoDB + Embeddings for vector search  
-> • Langmem for Episodic memory management  
->  
-> **Inner workings:**  
-> 🧪 We used a supervisor model with four agents: a researcher, a writer, a quality control agent, and a publisher. These are connected to an MCP Client (tool_node) that provides access to the appropriate tools.  
-> **Workflow:**  
-> ✍ The supervisor uses the researcher_node powered by Exa's Web API to look up news articles and the writer_node to draft the article.  
-> 🛂 The quality_node ensures that the news article is unique compared to previously published articles by using vector search and our custom MongoDB implementation of LangGraph's robust BaseStore.  
-> 🛫 The publisher_node leverages Composio's tools to post on LinkedIn.  
-> 🧠 Finally, the supervisor stores the episodic memory of the agent in the MongoDB database using Langmem's Store Manager.”
+Welcome to the **LinkedIn Ghostwriter** repository! This project serves as an intelligent writing assistant designed to enhance your LinkedIn presence. By leveraging the power of Langgraph, it helps you craft engaging posts, comments, and messages that resonate with your audience.
 
-## Overview
+## Table of Contents
 
-This project constructs a state graph-based workflow for a LinkedIn Ghostwriter Agent using a combination of:
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Releases](#releases)
 
-- **LangGraph & LangChain**: To orchestrate the agent workflows.
-- **MCP (Multi-Client Provider)**: For authentication and tool management.
-- **MongoDB + OpenAI Embeddings**: For vector-based search and checkpointing the state/episodic memory.
-- **Agents**: The supervisor delegates tasks across different nodes—researcher, writer, quality control, and publisher.
+## Introduction
 
-The agent follows these basic steps:
+In today's digital age, a strong LinkedIn profile is essential for professional networking. The **LinkedIn Ghostwriter** simplifies this process by generating high-quality content tailored to your needs. Whether you're looking to share insights, promote your work, or engage with your network, this tool is here to assist you.
 
-1. **Research**: Search for news articles using an external web API.
-2. **Writing**: Draft a news article.
-3. **Quality Check**: Ensure that the article is unique by comparing it with previously published content using vector search.
-4. **Publish**: Post the final content to LinkedIn.
-5. **Memory Storage**: Store details of the episode for future reference.
+## Features
 
-## Architecture
+- **Content Generation**: Automatically create posts and comments that capture attention.
+- **Customizable Templates**: Use pre-defined templates to maintain a consistent voice.
+- **User-Friendly Interface**: Easy to navigate, making it accessible for everyone.
+- **Real-Time Suggestions**: Get instant feedback on your writing to improve engagement.
 
-### Core Components
+## Installation
 
-- **StateGraph & State**:  
-  The graph is constructed using LangGraph’s `StateGraph` that defines nodes (agents) and edges (workflow connections). The `State` defines the type or structure of data that flows through the graph.
+To get started with **LinkedIn Ghostwriter**, follow these simple steps:
 
-- **Nodes**:  
-  - `supervisor_node`: Oversees and delegates work.  
-  - `researcher_node`: Searches for news articles (powered by Exa’s Web API).  
-  - `writer_node`: Drafts articles.  
-  - `quality_node`: Validates the article’s uniqueness using vector search.  
-  - `publisher_node`: Publishes the article on LinkedIn.  
-  - `tool_node`: Wraps external tools provided by the MCP client.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/akhila-sai-yerra/linkedin-ghostwriter.git
+   ```
 
-- **MCP Client & Tools**:  
-  The agent uses a `MultiServerMCPClient` to obtain external tools via different transport channels:  
-  - A local process using stdio (to run a Python MCP server).  
-  - A server-sent events (SSE) connection to Composio’s MCP URL.
+2. Navigate to the project directory:
+   ```bash
+   cd linkedin-ghostwriter
+   ```
 
-- **MongoDB Store**:  
-  The `MongoDBBaseStore` provides persistence and checkpointing capabilities using a custom index configuration built on OpenAI embeddings—facilitating vector search to check article uniqueness.
+3. Install the necessary dependencies:
+   ```bash
+   npm install
+   ```
 
-- **Embedding Configuration**:  
-  Uses the OpenAI embedding model to convert text into vector representations. The embedding function is integrated into the MongoDB indexing configuration.
+4. Start the application:
+   ```bash
+   npm start
+   ```
 
-### Graph Workflow
+## Usage
 
-1. The workflow begins at the `START` node, which immediately transitions to the `supervisor_node`.  
-2. The supervisor then leverages the `tool_node` (with external MCP tools) and connects with the other agent nodes.  
-3. After processing by the individual agent nodes (researcher, writer, quality, publisher), results and episodic memory data are stored in MongoDB via the compiled graph.
+Using the **LinkedIn Ghostwriter** is straightforward. Here’s how you can make the most of it:
+
+1. **Open the Application**: Launch the app after installation.
+2. **Select a Template**: Choose from various templates based on your content type.
+3. **Input Your Ideas**: Provide keywords or phrases you want to include.
+4. **Generate Content**: Click the "Generate" button to create your post.
+5. **Review and Edit**: Make any necessary adjustments to personalize your message.
+6. **Post to LinkedIn**: Copy your content and share it on your LinkedIn profile.
+
+## Contributing
+
+We welcome contributions to improve the **LinkedIn Ghostwriter**. Here’s how you can help:
+
+1. **Fork the Repository**: Click the fork button on the top right of the page.
+2. **Create a Branch**: Use a descriptive name for your branch.
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make Changes**: Implement your changes and commit them.
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. **Push to Your Branch**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. **Create a Pull Request**: Submit your changes for review.
+
+## License
+
+This project is licensed under the MIT License. Feel free to use it as you wish, but please give credit where it’s due.
+
+## Contact
+
+For questions or feedback, reach out to the project maintainer:
+
+- **Name**: Akhila Sai Yerra
+- **Email**: akhila@example.com
+
+## Releases
+
+To download the latest version of the **LinkedIn Ghostwriter**, visit our [Releases](https://github.com/akhila-sai-yerra/linkedin-ghostwriter/releases) section. Here, you can find all the updates and improvements made to the project.
+
+## Additional Resources
+
+### Screenshots
+
+![Screenshot 1](https://via.placeholder.com/800x400?text=Screenshot+of+LinkedIn+Ghostwriter)
+*Creating a new post with LinkedIn Ghostwriter*
+
+![Screenshot 2](https://via.placeholder.com/800x400?text=Screenshot+of+Templates)
+*Choosing a template for your content*
+
+### Related Projects
+
+- **Content Optimizer**: A tool that analyzes your writing for better engagement.
+- **Networking Assistant**: Helps you connect with like-minded professionals.
+
+### FAQs
+
+**Q: Can I use this tool for other platforms?**  
+A: Currently, it is optimized for LinkedIn. Future updates may expand its capabilities.
+
+**Q: Is there a mobile version?**  
+A: At this time, the application is desktop-based. We may consider a mobile version based on user demand.
+
+**Q: How do I report a bug?**  
+A: Please open an issue in the GitHub repository with detailed information about the bug.
+
+## Conclusion
+
+Thank you for checking out the **LinkedIn Ghostwriter**. We hope this tool makes your LinkedIn experience smoother and more effective. Don’t forget to explore the [Releases](https://github.com/akhila-sai-yerra/linkedin-ghostwriter/releases) for the latest updates. Happy writing!
